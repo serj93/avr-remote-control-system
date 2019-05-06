@@ -1,0 +1,600 @@
+
+RX.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000002b8  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000004  00800060  000002b8  0000034c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000007  00800064  00800064  00000350  2**0
+                  ALLOC
+  3 .stab         000006cc  00000000  00000000  00000350  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000085  00000000  00000000  00000a1c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_aranges 00000020  00000000  00000000  00000aa1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_pubnames 000000af  00000000  00000000  00000ac1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   00000215  00000000  00000000  00000b70  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 000000b2  00000000  00000000  00000d85  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   000003dc  00000000  00000000  00000e37  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_frame  00000040  00000000  00000000  00001214  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_str    000000fe  00000000  00000000  00001254  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_loc    0000006b  00000000  00000000  00001352  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_pubtypes 0000002b  00000000  00000000  000013bd  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	85 c0       	rjmp	.+266    	; 0x11e <__vector_9>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	23 c0       	rjmp	.+70     	; 0x5e <__vector_11>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	e8 eb       	ldi	r30, 0xB8	; 184
+  3a:	f2 e0       	ldi	r31, 0x02	; 2
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+  42:	a4 36       	cpi	r26, 0x64	; 100
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+
+00000048 <__do_clear_bss>:
+  48:	10 e0       	ldi	r17, 0x00	; 0
+  4a:	a4 e6       	ldi	r26, 0x64	; 100
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	ab 36       	cpi	r26, 0x6B	; 107
+  54:	b1 07       	cpc	r27, r17
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	8d d0       	rcall	.+282    	; 0x174 <main>
+  5a:	2c c1       	rjmp	.+600    	; 0x2b4 <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <__vector_11>:
+volatile unsigned char counter=0;			// счетчик накрутки таймера T/C0
+volatile unsigned char _backL=0;			// флаг стоп-сигналов: 1 - должен гореть; 0 - нет.
+volatile unsigned char count_buf=0;
+
+ISR(USART_RXC_vect)
+{
+  5e:	1f 92       	push	r1
+  60:	0f 92       	push	r0
+  62:	0f b6       	in	r0, 0x3f	; 63
+  64:	0f 92       	push	r0
+  66:	11 24       	eor	r1, r1
+  68:	2f 93       	push	r18
+  6a:	8f 93       	push	r24
+  6c:	9f 93       	push	r25
+ unsigned char status=0x00, data=0x00;
+
+ // включение watchdog на 120 ms если первая посылка
+ if(start)
+  6e:	80 91 60 00 	lds	r24, 0x0060
+  72:	88 23       	and	r24, r24
+  74:	59 f0       	breq	.+22     	; 0x8c <__vector_11+0x2e>
+ { 
+   wdt_enable(WDTO_120MS);					
+  76:	2b e0       	ldi	r18, 0x0B	; 11
+  78:	88 e1       	ldi	r24, 0x18	; 24
+  7a:	90 e0       	ldi	r25, 0x00	; 0
+  7c:	0f b6       	in	r0, 0x3f	; 63
+  7e:	f8 94       	cli
+  80:	a8 95       	wdr
+  82:	81 bd       	out	0x21, r24	; 33
+  84:	0f be       	out	0x3f, r0	; 63
+  86:	21 bd       	out	0x21, r18	; 33
+   start=0;
+  88:	10 92 60 00 	sts	0x0060, r1
+ }
+    					
+ // считывание ошибок
+ status=UCSRA;
+  8c:	8b b1       	in	r24, 0x0b	; 11
+ if((status&(_BV(FE)|_BV(PE)|_BV(DOR))))
+  8e:	8c 71       	andi	r24, 0x1C	; 28
+  90:	11 f4       	brne	.+4      	; 0x96 <__vector_11+0x38>
+  92:	04 c0       	rjmp	.+8      	; 0x9c <__vector_11+0x3e>
+ {
+  while(UCSRA&_BV(RXC)) data=UDR;
+  94:	8c b1       	in	r24, 0x0c	; 12
+  96:	5f 99       	sbic	0x0b, 7	; 11
+  98:	fd cf       	rjmp	.-6      	; 0x94 <__vector_11+0x36>
+  9a:	39 c0       	rjmp	.+114    	; 0x10e <__vector_11+0xb0>
+  return;
+ }
+
+ data=UDR;
+  9c:	8c b1       	in	r24, 0x0c	; 12
+
+ // ждем синхропакета
+ if(count==0)
+  9e:	90 91 65 00 	lds	r25, 0x0065
+  a2:	99 23       	and	r25, r25
+  a4:	49 f4       	brne	.+18     	; 0xb8 <__vector_11+0x5a>
+ { 
+  // пришел синхропакет - изменяем счетчик приема, пинаем сторожевой таймер
+  if(data==0xF0)
+  a6:	80 3f       	cpi	r24, 0xF0	; 240
+  a8:	91 f5       	brne	.+100    	; 0x10e <__vector_11+0xb0>
+  {
+    count++;
+  aa:	80 91 65 00 	lds	r24, 0x0065
+  ae:	8f 5f       	subi	r24, 0xFF	; 255
+  b0:	80 93 65 00 	sts	0x0065, r24
+    wdt_reset();
+  b4:	a8 95       	wdr
+  b6:	2b c0       	rjmp	.+86     	; 0x10e <__vector_11+0xb0>
+  }
+ }
+ else
+ {
+  // если синхропакет не в такт - сброс счетчика
+  if(data==0xF0) count=0;
+  b8:	80 3f       	cpi	r24, 0xF0	; 240
+  ba:	39 f1       	breq	.+78     	; 0x10a <__vector_11+0xac>
+  // иначе - преобразуем данные
+  else
+  {
+    switch(count)
+  bc:	90 91 65 00 	lds	r25, 0x0065
+  c0:	92 30       	cpi	r25, 0x02	; 2
+  c2:	a1 f0       	breq	.+40     	; 0xec <__vector_11+0x8e>
+  c4:	93 30       	cpi	r25, 0x03	; 3
+  c6:	a9 f0       	breq	.+42     	; 0xf2 <__vector_11+0x94>
+  c8:	91 30       	cpi	r25, 0x01	; 1
+  ca:	b1 f4       	brne	.+44     	; 0xf8 <__vector_11+0x9a>
+    {
+      case 1:
+      {
+	    if(data&_BV(6))shift=DOWN;
+  cc:	86 ff       	sbrs	r24, 6
+  ce:	02 c0       	rjmp	.+4      	; 0xd4 <__vector_11+0x76>
+  d0:	97 e0       	ldi	r25, 0x07	; 7
+  d2:	03 c0       	rjmp	.+6      	; 0xda <__vector_11+0x7c>
+		else if(data&_BV(7))shift=UP;
+  d4:	87 ff       	sbrs	r24, 7
+  d6:	04 c0       	rjmp	.+8      	; 0xe0 <__vector_11+0x82>
+  d8:	94 e0       	ldi	r25, 0x04	; 4
+  da:	90 93 64 00 	sts	0x0064, r25
+  de:	02 c0       	rjmp	.+4      	; 0xe4 <__vector_11+0x86>
+		else shift=0;
+  e0:	10 92 64 00 	sts	0x0064, r1
+
+		data&=~(_BV(7)|_BV(6));
+  e4:	8f 73       	andi	r24, 0x3F	; 63
+
+		count_drv=data;
+  e6:	80 93 61 00 	sts	0x0061, r24
+	    break;
+  ea:	06 c0       	rjmp	.+12     	; 0xf8 <__vector_11+0x9a>
+	  }
+
+      case 2:
+	  {
+        count_srv=data;
+  ec:	80 93 62 00 	sts	0x0062, r24
+	    break;
+  f0:	03 c0       	rjmp	.+6      	; 0xf8 <__vector_11+0x9a>
+	  }
+
+	  case 3:
+	  {
+        data&=~(_BV(7)|_BV(6));
+  f2:	8f 73       	andi	r24, 0x3F	; 63
+		binary=data;
+  f4:	80 93 66 00 	sts	0x0066, r24
+	  }
+    }
+   
+    count++;
+  f8:	80 91 65 00 	lds	r24, 0x0065
+  fc:	8f 5f       	subi	r24, 0xFF	; 255
+  fe:	80 93 65 00 	sts	0x0065, r24
+	if(count>3) count=0;
+ 102:	80 91 65 00 	lds	r24, 0x0065
+ 106:	84 30       	cpi	r24, 0x04	; 4
+ 108:	10 f0       	brcs	.+4      	; 0x10e <__vector_11+0xb0>
+ 10a:	10 92 65 00 	sts	0x0065, r1
+  }
+ }
+}
+ 10e:	9f 91       	pop	r25
+ 110:	8f 91       	pop	r24
+ 112:	2f 91       	pop	r18
+ 114:	0f 90       	pop	r0
+ 116:	0f be       	out	0x3f, r0	; 63
+ 118:	0f 90       	pop	r0
+ 11a:	1f 90       	pop	r1
+ 11c:	18 95       	reti
+
+0000011e <__vector_9>:
+
+ISR(TIMER0_OVF_vect)
+{
+ 11e:	1f 92       	push	r1
+ 120:	0f 92       	push	r0
+ 122:	0f b6       	in	r0, 0x3f	; 63
+ 124:	0f 92       	push	r0
+ 126:	11 24       	eor	r1, r1
+ 128:	8f 93       	push	r24
+ 12a:	9f 93       	push	r25
+ counter++;
+ 12c:	80 91 68 00 	lds	r24, 0x0068
+ 130:	8f 5f       	subi	r24, 0xFF	; 255
+ 132:	80 93 68 00 	sts	0x0068, r24
+
+ if(counter==10)
+ 136:	80 91 68 00 	lds	r24, 0x0068
+ 13a:	8a 30       	cpi	r24, 0x0A	; 10
+ 13c:	a1 f4       	brne	.+40     	; 0x166 <__vector_9+0x48>
+ {
+   counter=0;
+ 13e:	10 92 68 00 	sts	0x0068, r1
+
+   // стоп-сигнал
+   PORTB&=~_BV(PB4);
+ 142:	c4 98       	cbi	0x18, 4	; 24
+   _backL=0;
+ 144:	10 92 69 00 	sts	0x0069, r1
+
+   // поворотники
+   if(signal!=0)
+ 148:	80 91 67 00 	lds	r24, 0x0067
+ 14c:	88 23       	and	r24, r24
+ 14e:	59 f0       	breq	.+22     	; 0x166 <__vector_9+0x48>
+   if(signal==1)PORTD^=_BV(PD6);
+ 150:	80 91 67 00 	lds	r24, 0x0067
+ 154:	81 30       	cpi	r24, 0x01	; 1
+ 156:	21 f4       	brne	.+8      	; 0x160 <__vector_9+0x42>
+ 158:	82 b3       	in	r24, 0x12	; 18
+ 15a:	90 e4       	ldi	r25, 0x40	; 64
+ 15c:	89 27       	eor	r24, r25
+ 15e:	02 c0       	rjmp	.+4      	; 0x164 <__vector_9+0x46>
+   else PORTD^=_BV(PD7);
+ 160:	82 b3       	in	r24, 0x12	; 18
+ 162:	80 58       	subi	r24, 0x80	; 128
+ 164:	82 bb       	out	0x12, r24	; 18
+ }
+}
+ 166:	9f 91       	pop	r25
+ 168:	8f 91       	pop	r24
+ 16a:	0f 90       	pop	r0
+ 16c:	0f be       	out	0x3f, r0	; 63
+ 16e:	0f 90       	pop	r0
+ 170:	1f 90       	pop	r1
+ 172:	18 95       	reti
+
+00000174 <main>:
+
+int main(void)
+{
+ // выключение watchdog на случай сброса
+ wdt_disable();
+ 174:	88 e1       	ldi	r24, 0x18	; 24
+ 176:	0f b6       	in	r0, 0x3f	; 63
+ 178:	f8 94       	cli
+ 17a:	81 bd       	out	0x21, r24	; 33
+ 17c:	11 bc       	out	0x21, r1	; 33
+ 17e:	0f be       	out	0x3f, r0	; 63
+
+ // выводы OC1B/OC1A для ШИМ DRV; OC2 для SRV;PB0 - задний ход;
+ DDRB=0x1F;
+ 180:	8f e1       	ldi	r24, 0x1F	; 31
+ 182:	87 bb       	out	0x17, r24	; 23
+ PORTB=0xE0;
+ 184:	80 ee       	ldi	r24, 0xE0	; 224
+ 186:	88 bb       	out	0x18, r24	; 24
+
+ // PortC - дискретка выход (кроме reset)
+ DDRC=0x3F;
+ 188:	8f e3       	ldi	r24, 0x3F	; 63
+ 18a:	84 bb       	out	0x14, r24	; 20
+ PORTC=0x00;
+ 18c:	15 ba       	out	0x15, r1	; 21
+
+ // PD6, PD7 - выход светодиодов; остальное - входа
+ DDRD=0xC0;
+ 18e:	90 ec       	ldi	r25, 0xC0	; 192
+ 190:	91 bb       	out	0x11, r25	; 17
+ PORTD=0x3F;
+ 192:	82 bb       	out	0x12, r24	; 18
+
+ TCCR1A=0x00;
+ 194:	1f bc       	out	0x2f, r1	; 47
+ TCCR1B=0x00;
+ 196:	1e bc       	out	0x2e, r1	; 46
+
+ // Настройка ШИМ Driver: N=256; ржим=FastPWM; OC1A,OC1B  - неинверт.; Warning COM DESABLED!!!
+ TCCR1B|=_BV(WGM13)|_BV(WGM12)|_BV(CS12);
+ 198:	8e b5       	in	r24, 0x2e	; 46
+ 19a:	8c 61       	ori	r24, 0x1C	; 28
+ 19c:	8e bd       	out	0x2e, r24	; 46
+ //TCCR1A|=_BV(WGM11)|_BV(COM1A1)|_BV(COM1B1);
+ TCCR1A|=_BV(WGM11);
+ 19e:	8f b5       	in	r24, 0x2f	; 47
+ 1a0:	82 60       	ori	r24, 0x02	; 2
+ 1a2:	8f bd       	out	0x2f, r24	; 47
+
+ // пороги срабатывания для таймера Т/С1
+ ICR1=ICR_TOP;
+ 1a4:	8c e3       	ldi	r24, 0x3C	; 60
+ 1a6:	90 e0       	ldi	r25, 0x00	; 0
+ 1a8:	97 bd       	out	0x27, r25	; 39
+ 1aa:	86 bd       	out	0x26, r24	; 38
+ OCR1A=0x00;
+ 1ac:	1b bc       	out	0x2b, r1	; 43
+ 1ae:	1a bc       	out	0x2a, r1	; 42
+ OCR1B=0x00;
+ 1b0:	19 bc       	out	0x29, r1	; 41
+ 1b2:	18 bc       	out	0x28, r1	; 40
+
+ // выставление настроек Т/С2 - серва
+ OCR2=OCR_CEN; 
+ 1b4:	87 e1       	ldi	r24, 0x17	; 23
+ 1b6:	83 bd       	out	0x23, r24	; 35
+ TCCR2=0x00;
+ 1b8:	15 bc       	out	0x25, r1	; 37
+ // Настройка FastPWM Servo; прямой; N=1024; F=Fcpu/256*N=61 Hz;
+ TCCR2|=_BV(WGM21)|_BV(WGM20)|_BV(COM21)|_BV(CS22)|_BV(CS21)|_BV(CS20);
+ 1ba:	85 b5       	in	r24, 0x25	; 37
+ 1bc:	8f 66       	ori	r24, 0x6F	; 111
+ 1be:	85 bd       	out	0x25, r24	; 37
+
+ // скорость передачи 9600 bod
+ UBRRH=0;
+ 1c0:	10 bc       	out	0x20, r1	; 32
+ UBRRL=103;
+ 1c2:	87 e6       	ldi	r24, 0x67	; 103
+ 1c4:	89 b9       	out	0x09, r24	; 9
+
+ // инициализация UCSRA
+ UCSRA=0x00;
+ 1c6:	1b b8       	out	0x0b, r1	; 11
+
+ // D1 - выход USART; прерывание по приему;
+ UCSRB=0x00;
+ 1c8:	1a b8       	out	0x0a, r1	; 10
+ UCSRB|=_BV(RXEN)|_BV(RXCIE);
+ 1ca:	8a b1       	in	r24, 0x0a	; 10
+ 1cc:	80 69       	ori	r24, 0x90	; 144
+ 1ce:	8a b9       	out	0x0a, r24	; 10
+
+ // UCSRC: 8 бит данных; контроль четности;
+ UCSRC=_BV(URSEL)|_BV(UPM1)|_BV(UCSZ1)|_BV(UCSZ0);
+ 1d0:	86 ea       	ldi	r24, 0xA6	; 166
+ 1d2:	80 bd       	out	0x20, r24	; 32
+
+ // инициализация константы Servo
+ count_srv=9;
+ 1d4:	89 e0       	ldi	r24, 0x09	; 9
+ 1d6:	80 93 62 00 	sts	0x0062, r24
+
+ // выключение аналового компаратора (на всякие)
+ ACSR|=_BV(ACD);
+ 1da:	47 9a       	sbi	0x08, 7	; 8
+
+ // инициализация T/C0
+ TCNT0=0;
+ 1dc:	12 be       	out	0x32, r1	; 50
+ TIMSK|=_BV(TOIE0);
+ 1de:	89 b7       	in	r24, 0x39	; 57
+ 1e0:	81 60       	ori	r24, 0x01	; 1
+ 1e2:	89 bf       	out	0x39, r24	; 57
+ TCCR0|=_BV(CS02)|_BV(CS00);
+ 1e4:	83 b7       	in	r24, 0x33	; 51
+ 1e6:	85 60       	ori	r24, 0x05	; 5
+ 1e8:	83 bf       	out	0x33, r24	; 51
+
+ // общее разрешение прерываний
+ sei();
+ 1ea:	78 94       	sei
+  }
+
+  // к стоп-сигналам
+  if(count_buf>count_drv)
+  {
+	_backL=1;
+ 1ec:	21 e0       	ldi	r18, 0x01	; 1
+  if(count_srv==0 || count_srv==18)
+  {
+    if(signal==0)
+	{
+      if(count_srv==0)signal=1;
+	  else signal=2;
+ 1ee:	32 e0       	ldi	r19, 0x02	; 2
+ sei();
+
+ while(1)
+ { 
+  // выставление сервопривода
+  OCR2=OCR_MIN+count_srv;
+ 1f0:	80 91 62 00 	lds	r24, 0x0062
+ 1f4:	82 5f       	subi	r24, 0xF2	; 242
+ 1f6:	83 bd       	out	0x23, r24	; 35
+
+  // работа с двигателем
+  switch(shift)
+ 1f8:	80 91 64 00 	lds	r24, 0x0064
+ 1fc:	84 30       	cpi	r24, 0x04	; 4
+ 1fe:	89 f0       	breq	.+34     	; 0x222 <main+0xae>
+ 200:	87 30       	cpi	r24, 0x07	; 7
+ 202:	d9 f0       	breq	.+54     	; 0x23a <main+0xc6>
+ 204:	88 23       	and	r24, r24
+ 206:	21 f5       	brne	.+72     	; 0x250 <main+0xdc>
+  {
+    case 0:
+	{
+	  OCR1B=OCR1A=0x00;	
+ 208:	1b bc       	out	0x2b, r1	; 43
+ 20a:	1a bc       	out	0x2a, r1	; 42
+ 20c:	8a b5       	in	r24, 0x2a	; 42
+ 20e:	9b b5       	in	r25, 0x2b	; 43
+ 210:	99 bd       	out	0x29, r25	; 41
+ 212:	88 bd       	out	0x28, r24	; 40
+	  TCCR1A&=~(_BV(COM1A1)|_BV(COM1B1));
+ 214:	8f b5       	in	r24, 0x2f	; 47
+ 216:	8f 75       	andi	r24, 0x5F	; 95
+ 218:	8f bd       	out	0x2f, r24	; 47
+
+	  PORTB&=~(_BV(PB0)|_BV(PB4));
+ 21a:	88 b3       	in	r24, 0x18	; 24
+ 21c:	8e 7e       	andi	r24, 0xEE	; 238
+ 21e:	88 bb       	out	0x18, r24	; 24
+	  break;     
+ 220:	17 c0       	rjmp	.+46     	; 0x250 <main+0xdc>
+	}
+
+	case UP:
+	{
+	  
+	  OCR1B=0x00;
+ 222:	19 bc       	out	0x29, r1	; 41
+ 224:	18 bc       	out	0x28, r1	; 40
+      OCR1A=count_drv; 
+ 226:	80 91 61 00 	lds	r24, 0x0061
+ 22a:	90 e0       	ldi	r25, 0x00	; 0
+ 22c:	9b bd       	out	0x2b, r25	; 43
+ 22e:	8a bd       	out	0x2a, r24	; 42
+      TCCR1A|=_BV(COM1A1)|_BV(COM1B1);
+ 230:	8f b5       	in	r24, 0x2f	; 47
+ 232:	80 6a       	ori	r24, 0xA0	; 160
+ 234:	8f bd       	out	0x2f, r24	; 47
+
+	  PORTB&=~_BV(PB0);
+ 236:	c0 98       	cbi	0x18, 0	; 24
+      break;
+ 238:	0b c0       	rjmp	.+22     	; 0x250 <main+0xdc>
+	}
+
+	case DOWN:
+	{  
+	  OCR1A=0x00; 
+ 23a:	1b bc       	out	0x2b, r1	; 43
+ 23c:	1a bc       	out	0x2a, r1	; 42
+      OCR1B=count_drv;
+ 23e:	80 91 61 00 	lds	r24, 0x0061
+ 242:	90 e0       	ldi	r25, 0x00	; 0
+ 244:	99 bd       	out	0x29, r25	; 41
+ 246:	88 bd       	out	0x28, r24	; 40
+	  TCCR1A|=_BV(COM1A1)|_BV(COM1B1);
+ 248:	8f b5       	in	r24, 0x2f	; 47
+ 24a:	80 6a       	ori	r24, 0xA0	; 160
+ 24c:	8f bd       	out	0x2f, r24	; 47
+
+	  PORTB|=_BV(PB0);
+ 24e:	c0 9a       	sbi	0x18, 0	; 24
+	}
+  }
+
+  // к стоп-сигналам
+  if(count_buf>count_drv)
+ 250:	90 91 6a 00 	lds	r25, 0x006A
+ 254:	80 91 61 00 	lds	r24, 0x0061
+ 258:	89 17       	cp	r24, r25
+ 25a:	18 f4       	brcc	.+6      	; 0x262 <main+0xee>
+  {
+	_backL=1;
+ 25c:	20 93 69 00 	sts	0x0069, r18
+	PORTB|=_BV(PB4);
+ 260:	c4 9a       	sbi	0x18, 4	; 24
+  }
+  count_buf=count_drv;
+ 262:	80 91 61 00 	lds	r24, 0x0061
+ 266:	80 93 6a 00 	sts	0x006A, r24
+
+  // выставление дискреток
+  PORTC=binary;
+ 26a:	80 91 66 00 	lds	r24, 0x0066
+ 26e:	85 bb       	out	0x15, r24	; 21
+
+  // зажигаем поворотники
+  if(count_srv==0 || count_srv==18)
+ 270:	80 91 62 00 	lds	r24, 0x0062
+ 274:	88 23       	and	r24, r24
+ 276:	21 f0       	breq	.+8      	; 0x280 <main+0x10c>
+ 278:	80 91 62 00 	lds	r24, 0x0062
+ 27c:	82 31       	cpi	r24, 0x12	; 18
+ 27e:	79 f4       	brne	.+30     	; 0x29e <main+0x12a>
+  {
+    if(signal==0)
+ 280:	80 91 67 00 	lds	r24, 0x0067
+ 284:	88 23       	and	r24, r24
+ 286:	09 f0       	breq	.+2      	; 0x28a <main+0x116>
+ 288:	b3 cf       	rjmp	.-154    	; 0x1f0 <main+0x7c>
+	{
+      if(count_srv==0)signal=1;
+ 28a:	80 91 62 00 	lds	r24, 0x0062
+ 28e:	88 23       	and	r24, r24
+ 290:	19 f4       	brne	.+6      	; 0x298 <main+0x124>
+ 292:	20 93 67 00 	sts	0x0067, r18
+ 296:	ac cf       	rjmp	.-168    	; 0x1f0 <main+0x7c>
+	  else signal=2;
+ 298:	30 93 67 00 	sts	0x0067, r19
+ 29c:	a9 cf       	rjmp	.-174    	; 0x1f0 <main+0x7c>
+	}
+  }
+  else
+  if(signal!=0)
+ 29e:	80 91 67 00 	lds	r24, 0x0067
+ 2a2:	88 23       	and	r24, r24
+ 2a4:	09 f4       	brne	.+2      	; 0x2a8 <main+0x134>
+ 2a6:	a4 cf       	rjmp	.-184    	; 0x1f0 <main+0x7c>
+  {
+    signal=0;
+ 2a8:	10 92 67 00 	sts	0x0067, r1
+    PORTD&=~(_BV(PD7)|_BV(PD6));
+ 2ac:	82 b3       	in	r24, 0x12	; 18
+ 2ae:	8f 73       	andi	r24, 0x3F	; 63
+ 2b0:	82 bb       	out	0x12, r24	; 18
+ 2b2:	9e cf       	rjmp	.-196    	; 0x1f0 <main+0x7c>
+
+000002b4 <_exit>:
+ 2b4:	f8 94       	cli
+
+000002b6 <__stop_program>:
+ 2b6:	ff cf       	rjmp	.-2      	; 0x2b6 <__stop_program>
