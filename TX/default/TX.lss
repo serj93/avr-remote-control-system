@@ -1,0 +1,466 @@
+
+TX.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000232  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000006  00800060  00000232  000002c6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000001  00800066  00800066  000002cc  2**0
+                  ALLOC
+  3 .stab         000006cc  00000000  00000000  000002cc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000085  00000000  00000000  00000998  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_aranges 00000020  00000000  00000000  00000a1d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_pubnames 00000077  00000000  00000000  00000a3d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   0000015c  00000000  00000000  00000ab4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 0000009e  00000000  00000000  00000c10  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   000002d4  00000000  00000000  00000cae  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_frame  00000050  00000000  00000000  00000f84  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_str    000000c5  00000000  00000000  00000fd4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_pubtypes 0000001e  00000000  00000000  00001099  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	2d c0       	rjmp	.+90     	; 0x5e <__vector_1>
+   4:	73 c0       	rjmp	.+230    	; 0xec <__vector_2>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	8f c0       	rjmp	.+286    	; 0x132 <__vector_9>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	e2 e3       	ldi	r30, 0x32	; 50
+  3a:	f2 e0       	ldi	r31, 0x02	; 2
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+  42:	a6 36       	cpi	r26, 0x66	; 102
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+
+00000048 <__do_clear_bss>:
+  48:	10 e0       	ldi	r17, 0x00	; 0
+  4a:	a6 e6       	ldi	r26, 0x66	; 102
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	a7 36       	cpi	r26, 0x67	; 103
+  54:	b1 07       	cpc	r27, r17
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	92 d0       	rcall	.+292    	; 0x17e <main>
+  5a:	e9 c0       	rjmp	.+466    	; 0x22e <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <__vector_1>:
+volatile unsigned char count_srv=9;	    	// текущее значение сервы (не преобразовано)
+
+volatile unsigned char word[]={0xF0,0x00,0x09,0x00};
+
+ISR(INT0_vect)								// обработка прерывание ЭНКОДЕРА драйвера (work!)
+{
+  5e:	1f 92       	push	r1
+  60:	0f 92       	push	r0
+  62:	0f b6       	in	r0, 0x3f	; 63
+  64:	0f 92       	push	r0
+  66:	11 24       	eor	r1, r1
+  68:	2f 93       	push	r18
+  6a:	8f 93       	push	r24
+  6c:	9f 93       	push	r25
+ if((PIND&_BV(PD0)))
+  6e:	80 9b       	sbis	0x10, 0	; 16
+  70:	08 c0       	rjmp	.+16     	; 0x82 <__vector_1+0x24>
+ {
+  if(count_drv>0)count_drv--;
+  72:	80 91 60 00 	lds	r24, 0x0060
+  76:	88 23       	and	r24, r24
+  78:	69 f0       	breq	.+26     	; 0x94 <__vector_1+0x36>
+  7a:	80 91 60 00 	lds	r24, 0x0060
+  7e:	81 50       	subi	r24, 0x01	; 1
+  80:	07 c0       	rjmp	.+14     	; 0x90 <__vector_1+0x32>
+ }
+ else
+ {
+  if(count_drv<32)count_drv++;
+  82:	80 91 60 00 	lds	r24, 0x0060
+  86:	80 32       	cpi	r24, 0x20	; 32
+  88:	28 f4       	brcc	.+10     	; 0x94 <__vector_1+0x36>
+  8a:	80 91 60 00 	lds	r24, 0x0060
+  8e:	8f 5f       	subi	r24, 0xFF	; 255
+  90:	80 93 60 00 	sts	0x0060, r24
+ }
+
+  //---shift=0;
+  word[1]=0x00;
+  94:	10 92 63 00 	sts	0x0063, r1
+
+  if(count_drv>17)
+  98:	80 91 60 00 	lds	r24, 0x0060
+  9c:	82 31       	cpi	r24, 0x12	; 18
+  9e:	58 f0       	brcs	.+22     	; 0xb6 <__vector_1+0x58>
+  { 
+   //---shift=UP;
+//   if(count_drv<24)word[1]=7; else   
+   word[1]=(count_drv-17)*4;
+  a0:	80 91 60 00 	lds	r24, 0x0060
+  a4:	88 0f       	add	r24, r24
+  a6:	88 0f       	add	r24, r24
+  a8:	84 54       	subi	r24, 0x44	; 68
+  aa:	80 93 63 00 	sts	0x0063, r24
+
+   word[1]|=_BV(7);
+  ae:	80 91 63 00 	lds	r24, 0x0063
+  b2:	80 68       	ori	r24, 0x80	; 128
+  b4:	11 c0       	rjmp	.+34     	; 0xd8 <__vector_1+0x7a>
+  }   
+  else
+  if(count_drv<15)
+  b6:	80 91 60 00 	lds	r24, 0x0060
+  ba:	8f 30       	cpi	r24, 0x0F	; 15
+  bc:	78 f4       	brcc	.+30     	; 0xdc <__vector_1+0x7e>
+  {
+   //---shift=DOWN;
+//  if(count_drv>8) word[1]=7; else 
+   word[1]=(15-count_drv)*4;
+  be:	20 91 60 00 	lds	r18, 0x0060
+  c2:	8f e0       	ldi	r24, 0x0F	; 15
+  c4:	90 e0       	ldi	r25, 0x00	; 0
+  c6:	82 1b       	sub	r24, r18
+  c8:	91 09       	sbc	r25, r1
+  ca:	88 0f       	add	r24, r24
+  cc:	88 0f       	add	r24, r24
+  ce:	80 93 63 00 	sts	0x0063, r24
+
+   word[1]|=_BV(6);
+  d2:	80 91 63 00 	lds	r24, 0x0063
+  d6:	80 64       	ori	r24, 0x40	; 64
+  d8:	80 93 63 00 	sts	0x0063, r24
+  } 
+
+}
+  dc:	9f 91       	pop	r25
+  de:	8f 91       	pop	r24
+  e0:	2f 91       	pop	r18
+  e2:	0f 90       	pop	r0
+  e4:	0f be       	out	0x3f, r0	; 63
+  e6:	0f 90       	pop	r0
+  e8:	1f 90       	pop	r1
+  ea:	18 95       	reti
+
+000000ec <__vector_2>:
+
+
+ISR(INT1_vect)							// обработка прерывания ЭНКОДЕРА сервы (work!)
+{
+  ec:	1f 92       	push	r1
+  ee:	0f 92       	push	r0
+  f0:	0f b6       	in	r0, 0x3f	; 63
+  f2:	0f 92       	push	r0
+  f4:	11 24       	eor	r1, r1
+  f6:	8f 93       	push	r24
+ if((PIND&_BV(PD4)))
+  f8:	84 9b       	sbis	0x10, 4	; 16
+  fa:	08 c0       	rjmp	.+16     	; 0x10c <__vector_2+0x20>
+ {
+  if(count_srv>0)count_srv--;
+  fc:	80 91 61 00 	lds	r24, 0x0061
+ 100:	88 23       	and	r24, r24
+ 102:	69 f0       	breq	.+26     	; 0x11e <__vector_2+0x32>
+ 104:	80 91 61 00 	lds	r24, 0x0061
+ 108:	81 50       	subi	r24, 0x01	; 1
+ 10a:	07 c0       	rjmp	.+14     	; 0x11a <__vector_2+0x2e>
+ }
+ else
+ {
+  if(count_srv<18)count_srv++;
+ 10c:	80 91 61 00 	lds	r24, 0x0061
+ 110:	82 31       	cpi	r24, 0x12	; 18
+ 112:	28 f4       	brcc	.+10     	; 0x11e <__vector_2+0x32>
+ 114:	80 91 61 00 	lds	r24, 0x0061
+ 118:	8f 5f       	subi	r24, 0xFF	; 255
+ 11a:	80 93 61 00 	sts	0x0061, r24
+ }
+
+ word[2]=count_srv;
+ 11e:	80 91 61 00 	lds	r24, 0x0061
+ 122:	80 93 64 00 	sts	0x0064, r24
+}
+ 126:	8f 91       	pop	r24
+ 128:	0f 90       	pop	r0
+ 12a:	0f be       	out	0x3f, r0	; 63
+ 12c:	0f 90       	pop	r0
+ 12e:	1f 90       	pop	r1
+ 130:	18 95       	reti
+
+00000132 <__vector_9>:
+
+
+ISR(TIMER0_OVF_vect) 					// отправка данных через интервал
+{
+ 132:	1f 92       	push	r1
+ 134:	0f 92       	push	r0
+ 136:	0f b6       	in	r0, 0x3f	; 63
+ 138:	0f 92       	push	r0
+ 13a:	11 24       	eor	r1, r1
+ 13c:	8f 93       	push	r24
+ 13e:	ef 93       	push	r30
+ 140:	ff 93       	push	r31
+ while(!(UCSRA&_BV(UDRE)));
+ 142:	5d 9b       	sbis	0x0b, 5	; 11
+ 144:	fe cf       	rjmp	.-4      	; 0x142 <__vector_9+0x10>
+ UDR=word[count];
+ 146:	e0 91 66 00 	lds	r30, 0x0066
+ 14a:	f0 e0       	ldi	r31, 0x00	; 0
+ 14c:	ee 59       	subi	r30, 0x9E	; 158
+ 14e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 150:	80 81       	ld	r24, Z
+ 152:	8c b9       	out	0x0c, r24	; 12
+
+ TCNT0=DELAY;
+ 154:	83 e6       	ldi	r24, 0x63	; 99
+ 156:	82 bf       	out	0x32, r24	; 50
+ count++;
+ 158:	80 91 66 00 	lds	r24, 0x0066
+ 15c:	8f 5f       	subi	r24, 0xFF	; 255
+ 15e:	80 93 66 00 	sts	0x0066, r24
+ if(count>3)count=0;
+ 162:	80 91 66 00 	lds	r24, 0x0066
+ 166:	84 30       	cpi	r24, 0x04	; 4
+ 168:	10 f0       	brcs	.+4      	; 0x16e <__vector_9+0x3c>
+ 16a:	10 92 66 00 	sts	0x0066, r1
+}
+ 16e:	ff 91       	pop	r31
+ 170:	ef 91       	pop	r30
+ 172:	8f 91       	pop	r24
+ 174:	0f 90       	pop	r0
+ 176:	0f be       	out	0x3f, r0	; 63
+ 178:	0f 90       	pop	r0
+ 17a:	1f 90       	pop	r1
+ 17c:	18 95       	reti
+
+0000017e <main>:
+
+
+int main(void)
+{
+ // входа кнопок с подтягивающим сопротивлением (дискретка)
+ DDRB=0x00;
+ 17e:	17 ba       	out	0x17, r1	; 23
+ PORTB=0x3F;
+ 180:	8f e3       	ldi	r24, 0x3F	; 63
+ 182:	88 bb       	out	0x18, r24	; 24
+
+ // входа энкодера PD0,PD2,PD3,PD4 (без подтяжки); кнопки сброса PD6,PD7 (с подтяжкой);
+ DDRD=0x00;
+ 184:	11 ba       	out	0x11, r1	; 17
+ PORTD=0xE0;
+ 186:	80 ee       	ldi	r24, 0xE0	; 224
+ 188:	82 bb       	out	0x12, r24	; 18
+
+ // выхода светодиодов индикации min/max; остальные - входа (с подтяжкой, кроме PC6 Reset)
+ DDRC=0x0F;
+ 18a:	8f e0       	ldi	r24, 0x0F	; 15
+ 18c:	84 bb       	out	0x14, r24	; 20
+ PORTC=0xB0;
+ 18e:	80 eb       	ldi	r24, 0xB0	; 176
+ 190:	85 bb       	out	0x15, r24	; 21
+ 
+ // настраиваем выход INT0 / INT1 на прерывание
+ MCUCR|=_BV(ISC01)|_BV(ISC11);
+ 192:	85 b7       	in	r24, 0x35	; 53
+ 194:	8a 60       	ori	r24, 0x0A	; 10
+ 196:	85 bf       	out	0x35, r24	; 53
+ // разрешаем это прерывание в GIMSC
+ GIMSK|=_BV(INT0)|_BV(INT1); 
+ 198:	8b b7       	in	r24, 0x3b	; 59
+ 19a:	80 6c       	ori	r24, 0xC0	; 192
+ 19c:	8b bf       	out	0x3b, r24	; 59
+
+ // скорость передачи 9600 bod
+ UBRRH=0;
+ 19e:	10 bc       	out	0x20, r1	; 32
+ UBRRL=103;
+ 1a0:	87 e6       	ldi	r24, 0x67	; 103
+ 1a2:	89 b9       	out	0x09, r24	; 9
+
+ // инициализация UCSRA
+ UCSRA=0x00;
+ 1a4:	1b b8       	out	0x0b, r1	; 11
+
+ // D1 - выход USART
+ UCSRB=0x00;
+ 1a6:	1a b8       	out	0x0a, r1	; 10
+ UCSRB|=_BV(TXEN);
+ 1a8:	53 9a       	sbi	0x0a, 3	; 10
+
+ // UCSRC: 8 бит данных; контроль четности;
+ UCSRC=_BV(URSEL)|_BV(UPM1)|_BV(UCSZ1)|_BV(UCSZ0);
+ 1aa:	86 ea       	ldi	r24, 0xA6	; 166
+ 1ac:	80 bd       	out	0x20, r24	; 32
+
+ // настройка Т/C0 (задержка передачи=10мс); N=1024; прерывание по переполнению; 
+ TIMSK|=_BV(TOIE0);
+ 1ae:	89 b7       	in	r24, 0x39	; 57
+ 1b0:	81 60       	ori	r24, 0x01	; 1
+ 1b2:	89 bf       	out	0x39, r24	; 57
+ TCCR0|=_BV(CS02)|_BV(CS00);
+ 1b4:	83 b7       	in	r24, 0x33	; 51
+ 1b6:	85 60       	ori	r24, 0x05	; 5
+ 1b8:	83 bf       	out	0x33, r24	; 51
+ TCNT0=DELAY; 
+ 1ba:	83 e6       	ldi	r24, 0x63	; 99
+ 1bc:	82 bf       	out	0x32, r24	; 50
+
+ // инициализация константы сервы
+ count_srv=9;
+ 1be:	89 e0       	ldi	r24, 0x09	; 9
+ 1c0:	80 93 61 00 	sts	0x0061, r24
+
+  // выключение аналового компаратора (на всякие)
+ ACSR|=_BV(ACD);
+ 1c4:	47 9a       	sbi	0x08, 7	; 8
+
+ // общее разрешение прерываний
+ sei();
+ 1c6:	78 94       	sei
+
+   // сброс в 0 положения srv
+   if(!(PIND&(1<<PD6)))
+   {
+     while(!(PIND&(1<<PD6)));
+     word[2]=9;
+ 1c8:	99 e0       	ldi	r25, 0x09	; 9
+   // cброс в 0 положения drv
+   if(!(PIND&(1<<PD7)))
+   {
+     while(!(PIND&(1<<PD7)));
+     word[1]=0x00;
+	 count_drv=16;
+ 1ca:	20 e1       	ldi	r18, 0x10	; 16
+ sei();
+
+ while(1)
+ { 
+   // считывание дискретных каналов
+   word[3]=~PINB;
+ 1cc:	86 b3       	in	r24, 0x16	; 22
+ 1ce:	80 95       	com	r24
+ 1d0:	80 93 65 00 	sts	0x0065, r24
+
+
+   // сброс в 0 положения srv
+   if(!(PIND&(1<<PD6)))
+ 1d4:	86 99       	sbic	0x10, 6	; 16
+ 1d6:	06 c0       	rjmp	.+12     	; 0x1e4 <main+0x66>
+   {
+     while(!(PIND&(1<<PD6)));
+ 1d8:	86 9b       	sbis	0x10, 6	; 16
+ 1da:	fe cf       	rjmp	.-4      	; 0x1d8 <main+0x5a>
+     word[2]=9;
+ 1dc:	90 93 64 00 	sts	0x0064, r25
+	 count_srv=9;
+ 1e0:	90 93 61 00 	sts	0x0061, r25
+   }
+
+   // cброс в 0 положения drv
+   if(!(PIND&(1<<PD7)))
+ 1e4:	87 99       	sbic	0x10, 7	; 16
+ 1e6:	06 c0       	rjmp	.+12     	; 0x1f4 <main+0x76>
+   {
+     while(!(PIND&(1<<PD7)));
+ 1e8:	87 9b       	sbis	0x10, 7	; 16
+ 1ea:	fe cf       	rjmp	.-4      	; 0x1e8 <main+0x6a>
+     word[1]=0x00;
+ 1ec:	10 92 63 00 	sts	0x0063, r1
+	 count_drv=16;
+ 1f0:	20 93 60 00 	sts	0x0060, r18
+   }
+   
+   // установка светодиодов max/min ДРАЙВЕР
+   switch(count_drv)
+ 1f4:	80 91 60 00 	lds	r24, 0x0060
+ 1f8:	88 23       	and	r24, r24
+ 1fa:	19 f0       	breq	.+6      	; 0x202 <main+0x84>
+ 1fc:	80 32       	cpi	r24, 0x20	; 32
+ 1fe:	29 f4       	brne	.+10     	; 0x20a <main+0x8c>
+ 200:	02 c0       	rjmp	.+4      	; 0x206 <main+0x88>
+   {
+     case 0  : PORTC|=_BV(PC1); break;
+ 202:	a9 9a       	sbi	0x15, 1	; 21
+ 204:	05 c0       	rjmp	.+10     	; 0x210 <main+0x92>
+	 case 32 : PORTC|=_BV(PC0); break;   
+ 206:	a8 9a       	sbi	0x15, 0	; 21
+ 208:	03 c0       	rjmp	.+6      	; 0x210 <main+0x92>
+     default : PORTC&=~(_BV(PC1)|_BV(PC0));
+ 20a:	85 b3       	in	r24, 0x15	; 21
+ 20c:	8c 7f       	andi	r24, 0xFC	; 252
+ 20e:	85 bb       	out	0x15, r24	; 21
+   }
+   
+   // установка светодиодов max/min СЕРВА
+   switch(count_srv)
+ 210:	80 91 61 00 	lds	r24, 0x0061
+ 214:	88 23       	and	r24, r24
+ 216:	19 f0       	breq	.+6      	; 0x21e <main+0xa0>
+ 218:	82 31       	cpi	r24, 0x12	; 18
+ 21a:	29 f4       	brne	.+10     	; 0x226 <main+0xa8>
+ 21c:	02 c0       	rjmp	.+4      	; 0x222 <main+0xa4>
+   {
+     case 0  : PORTC|=_BV(PC3); break;
+ 21e:	ab 9a       	sbi	0x15, 3	; 21
+ 220:	d5 cf       	rjmp	.-86     	; 0x1cc <main+0x4e>
+	 case 18 : PORTC|=_BV(PC2); break;   
+ 222:	aa 9a       	sbi	0x15, 2	; 21
+ 224:	d3 cf       	rjmp	.-90     	; 0x1cc <main+0x4e>
+     default : PORTC&=~(_BV(PC3)|_BV(PC2));
+ 226:	85 b3       	in	r24, 0x15	; 21
+ 228:	83 7f       	andi	r24, 0xF3	; 243
+ 22a:	85 bb       	out	0x15, r24	; 21
+ 22c:	cf cf       	rjmp	.-98     	; 0x1cc <main+0x4e>
+
+0000022e <_exit>:
+ 22e:	f8 94       	cli
+
+00000230 <__stop_program>:
+ 230:	ff cf       	rjmp	.-2      	; 0x230 <__stop_program>
