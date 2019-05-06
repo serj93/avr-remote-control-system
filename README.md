@@ -13,7 +13,7 @@
 ### Схемы
 
 Передатчик:
-![](schemes/TX.JPG)
+![](schemas/TX.JPG)
 
 Приемник:
-![](schemes/RX.JPG)
+![](schemas/RX.JPG)
